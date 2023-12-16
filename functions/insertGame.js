@@ -1,4 +1,4 @@
-const { createClient } = require("@astrajs/collections");
+const { getGamesCollection } = require("./utils/astraClient");
 
 exports.handler = async (event, context) => {
   let gameId;
@@ -26,11 +26,6 @@ exports.handler = async (event, context) => {
     authToken: process.env.ASTRA_DB_TOKEN, // Using the token for authentication
   });
 
-  const gamesCollection = astraClient
-    .namespace(process.env.ASTRA_DB_KEYSPACE)
-    .collection(process.env.GAMES_COLLECTION);
-
-  // let's provision a new game
   try {
     // let's create a new game with the gamesCollection
     const res = await gamesCollection.create(gameId, gamePayload);

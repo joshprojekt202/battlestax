@@ -2,25 +2,23 @@
 
 [![License Apache2](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Discord](https://img.shields.io/discord/685554030159593522)](https://discord.com/widget?id=685554030159593522&theme=dark)
-[![Actions Status](https://github.com/DataStax-Academy/battlestax/workflows/BattleStax%20Tests/badge.svg)](https://github.com/DataStax-Academy/battlestax/actions) 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e265340f-c6a6-4d7b-b24c-438b87c67876/deploy-status)](https://app.netlify.com/sites/battlestax-tutorial/deploys)
 
 🏠 [Table of Contents](./README.md#%EF%B8%8F-table-of-contents) > 📚 [What is Redux and React](./README_Redux_React.md) > ⚒️ **[Create client State with Redux](#)**
 
 **Objectives** 
 
-**Redux Tool Kit (RTK)** tremendously simplifies using Redux, elminating most of the issues most people have when using it. We will use RTK for state management on the Client and see how it is working with Astra.
+**Redux Tool Kit (RTK)** tremendously simplifies using Redux, eliminating most of the issues most people have when using it. We will use RTK for state management on the Client and see how it is working with Astra.
 
 In this **step 3** we will:
 - Build out the game slice boilerplate code by implementing one reducer, exporting an action and a selector
 - Run tests to try out the functionality of our game slice
 
 **We will cover:**
-1. [Setup your environment](#1-setup-your-environment)
-2. [Building a `gameSlice`](#2-building-a-gameslice)
-3. [Generate an action and a selector](#3-generate-an-action-and-a-selector)
-4. [Create an Async Action](#4-create-an-async-action)
-5. [Running TDD tests](#5-running-tdd-tests)
+1. [Building a `gameSlice`](#1-building-a-gameslice)
+2. [Generate an action and a selector](#2-generate-an-action-and-a-selector)
+3. [Create an Async Action](#3-create-an-async-action)
+4. [Running TDD tests](#4-running-tdd-tests)
 
 
 An application's state is divided into "slices" that are corresponding to each feature set of the application. 
@@ -30,25 +28,29 @@ The Lobby and Player clients stay connected, as once the state is updated, it wi
 
 ![state-flow](./tutorial/state-flow.png)
 
+For a **FULL** code solution to this section **`click`** the image below or just go [HERE](https://github.com/DataStax-Academy/battlestax/blob/1aa9e7ac7e3c6840a79b68bd93f62de45b826559/src/store/gameSlice.js). You can also use the [RAW](https://raw.githubusercontent.com/DataStax-Academy/battlestax/1aa9e7ac7e3c6840a79b68bd93f62de45b826559/src/store/gameSlice.js) version for easy copying.
+
+[![Code solution](./tutorial/step-3-code-solution.png?raw=true)](https://github.com/DataStax-Academy/battlestax/pull/7/files)
+
+**_Don't forget to SAVE your changes or enable autosave in GitPod._**
+
 ---
 
-## 1. Setup your environment
-
-**✅ Step 1a: Checkout expected branch**
-
-1. Switch to branch `step-3`
-* For this part of the tutorial, we will be working in step-3 branch. Switch branches by using the following command in the terminal
-
-📘 **Command to execute**
-
-`git checkout step-3`
-
-### [🔝](#)
-
-## 2. Building a `gameSlice`
+## 1. Building a `gameSlice`
 
 Let's use the  Redux Toolkit to build out the game slice that will set the game code as part of the state. Redux Toolkit allows us to write shorter logic that's easier to read, while still following the same Redux behavior and data flow. Open the `src/store/gameSlice.js` file to see skeleton code we have provided to get you started.
 
+![gameslice-ide](./tutorial/gameslice-ide.png)
+
+First things first, we'll need to generate a game ID a little later in the code and to help with that we need to import the util/random library. Add the import for **`generateGameId`** after **`createSlice`**.
+
+📘 **Code to copy**
+
+```javascript
+import { createSlice } from "@reduxjs/toolkit";
+import { generateGameId } from "../util/random";
+
+```
 
 Lets discuss some of the parameters in `createSlice`.
 
@@ -67,7 +69,7 @@ export const slice = createSlice({
   },
 });
 ```
-**✅ Step 2a: Create the setID reduucer**
+**✅ Step 1a: Create the setID reduucer**
 
 First, we need to create a reducer that will allow us to modify the game id: 
 
@@ -79,7 +81,7 @@ setId: (state, action) => {
   state.id = action.payload;
 },
 ```
-**✅ Step 2b: Create the setIdError and setIdLoading reducers**
+**✅ Step 1b: Create the setIdError and setIdLoading reducers**
 
 Next, we need to create some reducers that will allow us to handle the API request changes: 
 
@@ -98,13 +100,13 @@ setIdLoading: (state, action) => {
 
 ### [🔝](#)
 
-## 3. Generate an action and a selector
+## 2. Generate an action and a selector
 
 Now that we have a reducer, RTK will generate an action and a selector for us. 
 * An **action** is functions that call reducers. An action dispatches a state change event, then the reducer gets that event and figures out what to do with it
 * A **selector** (`selectId` in our case) is simply a function that accepts Redux state as an argument and returns data that is derived from that state. It is small function you write that can take the entire Redux state, and pick out a value from it. This will be useful in the next step of our app development.
 
-**✅ Step 3a: Export an action and a selector**
+**✅ Step 2a: Export an action and a selector**
 
 Let's export the action and the selector for our game. We can call actions and selector from other places in out code base. This will be useful in the next step of our app development.
 
@@ -119,7 +121,7 @@ export const selectGame = (state) => state.game;
 ### [🔝](#)
 
 
-## 4. Create an Async Action
+## 3. Create an Async Action
 
 
 
@@ -142,19 +144,19 @@ export const createGame = () => {
 };
 ```
 
-**✅ Step 4a: Set the id state back to the defaults**
+**✅ Step 3a: Set the id state back to the defaults**
 
 📘 **Code to copy**
 
 ```javascript
 // let's set the id state back to the defaults
-    dispatch(setIdLoading(true));
-    dispatch(setIdError(""));
-    dispatch(setId(""));
+dispatch(setIdLoading(true));
+dispatch(setIdError(""));
+dispatch(setId(""));
 ```
 
 
-**✅ Step 4b: Generate a game code and insert it into Astra**
+**✅ Step 3b: Generate a game code and insert it into Astra**
 
 Call the `generateGameId()` from `src/util/random.js` to generate a new game id for us. Then we initialize a new game by inserting the game id into Astra with the `insertGame` function we created in step 2.
 
@@ -174,7 +176,7 @@ if (!res.ok) {
 }
 ```      
 
-**✅ Step 4c: Set the game id as part of state**
+**✅ Step 3c: Set the game id as part of state**
 
 We call the `setId` reducer to set the game id as part of state. We get the game id from the  JSON response from the REST call, incase the request fails, it won't lead to inconsistancy between Astra and game state.
 
@@ -191,10 +193,10 @@ While we are at it, let's be sure to handle any potential errors that may arise,
 
 ```javascript
 // let's set the id error if there is one
-      dispatch(setIdError(e.message));
+dispatch(setIdError(e.message));
 ```
 
-**✅ Step 4d: Set id state to not loading**
+**✅ Step 3d: Set id state to not loading**
 
 Once the try block has executed, the id is no longer in a state of loading.
 
@@ -205,9 +207,13 @@ Once the try block has executed, the id is no longer in a state of loading.
 dispatch(setIdLoading(false));
 ```
 
+For a **FULL** code solution to this section **`click`** the image below or just go [HERE](https://github.com/DataStax-Academy/battlestax/blob/1aa9e7ac7e3c6840a79b68bd93f62de45b826559/src/store/gameSlice.js). You can also use the [RAW](https://raw.githubusercontent.com/DataStax-Academy/battlestax/1aa9e7ac7e3c6840a79b68bd93f62de45b826559/src/store/gameSlice.js) version for easy copying.
+
+[![Code solution](./tutorial/step-3-code-solution.png?raw=true)](https://github.com/DataStax-Academy/battlestax/pull/7/files)
+
 ### [🔝](#)
 
-## 5. Running TDD tests
+## 4. Running TDD tests
 
 We are provided with test cases `store/gameSlice.test.js` which will test that our slice we created working is in `store/gameSlice.js`. The tests will ensure that `gameSlice.js` does the following:
 
@@ -230,7 +236,7 @@ it("should set a game id", () => {
     const nextState = reducer(initialState, setId(gameId));
     const rootState = { game: nextState };
     expect(selectGame(rootState).id).toEqual(gameId);
-  });
+});
 ```
 
 ✔️  _TEST 3_: If a new game is in the process of loading, the state needs to be made aware of it.
@@ -272,7 +278,7 @@ it("should create a new game", async () => {
   expect(selectGame(finalState).id).toEqual("DANG");
 });
 ```
-**✅ Step 5a: Test the gameSlice**
+**✅ Step 4a: Test the gameSlice**
 
 Now, we can run our tests using `npm test src/store/gameSlice.test.js` to see that we have a functioning game slice.
 
@@ -284,19 +290,9 @@ Now, we can run our tests using `npm test src/store/gameSlice.test.js` to see th
 
 <img src="./tutorial/slice-test.png" width="455" height="160">
 
-## 6. Merge back to master
-
-Now that we've updated our code we need to push these changes back to master and kick off an automated deploy in Netlify.
-
-📘 **Commands to execute**
-
-```bash
-git add src/store/gameSlice.js
-git commit -m "Merging step3 into master
-git push
-```
-
 ### [🔝](#)
+
+Ok, wonderful! If your gameSlice tests are passing then move to the next section. You can always reference the FULL code [HERE](https://github.com/DataStax-Academy/battlestax/pull/7/files).
 
 ---
 🏠 **Back** to [Table of Contents](./README.md#%EF%B8%8F-table-of-contents) or **move** to the next section **=>** [Bind Redux to the User Interface](./README_step04.md)

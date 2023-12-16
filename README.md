@@ -2,10 +2,9 @@
 
 [![License Apache2](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Discord](https://img.shields.io/discord/685554030159593522)](https://discord.com/widget?id=685554030159593522&theme=dark)
-[![Actions Status](https://github.com/DataStax-Academy/battlestax/workflows/BattleStax%20Tests/badge.svg)](https://github.com/DataStax-Academy/battlestax/actions) 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e265340f-c6a6-4d7b-b24c-438b87c67876/deploy-status)](https://app.netlify.com/sites/battlestax-tutorial/deploys)
 
-Welcome to **BattleStax**, a [JAMStack](https://jamstack.org/) game that uses [Netlify](https://www.netlify.com/jamstack/), [DataStax Astra](https://dtsx.io/workshop), and [GitHub](https://github.com/) to demonstrate how to build and deploy an application using modern, scalable architectures. 
+Welcome to **BattleStax**, an online party game that you can enjoy with your friends. BattleStax is implemented as a [JAMStack](https://jamstack.org/) app that uses [Stargate](https://stargate.io), [Netlify](https://www.netlify.com/jamstack/), [Astra](https://dtsx.io/workshop), and [GitHub](https://github.com/) to demonstrate how to build and deploy an application using modern, scalable architectures. 
 
 In this 3 hour workshop you will create your own **BattleStax** game using [React](https://reactjs.org/) and [Redux](https://redux.js.org/) implemented with a CI/CD pipeline, global CDN network, and [Apache Cassandra](https://cassandra.apache.org/) all using **FREE** tech.
 
@@ -13,8 +12,12 @@ In this 3 hour workshop you will create your own **BattleStax** game using [Reac
 
 ## ℹ️ Housekeeping
 
+<details><summary>Click to view the housekeeping items (<i><!--Youtube stream, -->Discord Chat,  Mentimeter quizz, the crew</i>)</summary>
+<p>
+
 It doesn't matter if you join our workshop live or you prefer to do at your own pace, we have you covered. In this repository, you'll find everything you need for this workshop.
 
+<!-- 
 ### 🎥 Live and questions with Youtube**
 
 The workshop is live Streamed on youtube, twitch and linkedin. After the session the recordings will be available on our [`DataStax Developers YouTube channel`](https://www.youtube.com/channel/UCAIQY251avaMv7bBv5PCo-A)
@@ -22,6 +25,8 @@ The workshop is live Streamed on youtube, twitch and linkedin. After the session
 *Click The image to join the stream*
 
 [![stream](./tutorial/workshop-live.png)](https://vimeo.com/datastax/review/478138764/8983f4fca5)
+
+-->
 
 ### 💬 Chat with Discord*
 
@@ -60,15 +65,21 @@ The materials has been prepared with live with our great team
 
 ![stream](./tutorial/line.png)
 
+<!--
 ## 🚀🚀 🚀  Let's Play the Game !
 
-Brave yourselves, everybody goes to [https://battlestax-workshop.netlify.app/](https://battlestax-workshop.netlify.app/). 
+Brace yourselves, everybody goes to [https://battlestax-workshop.netlify.app/](https://battlestax-workshop.netlify.app/). 
 
 [![.](./tutorial/rocket-animation.gif)](https://battlestax-workshop.netlify.app/)
 
+-->
+
+</p>
+</details>
+
 ## 🗓️ Table of Contents
 
-*All the tutorials and readme files are on the **master**. The **bootstraping** step is mandatory for you do the exercises. Then, checkout the branch you need to jump to any step. Get a look at all branches [here](https://github.com/DataStax-Academy/battlestax/branches)*
+*All the tutorials and readme files are on the **master**. Start there and then follow each step to get everything hooked up. Get a look at all branches [here](https://github.com/DataStax-Academy/battlestax/branches)*
 
 - **Bootstraping**
   - 📚 [What is the JAMStack](./README_JAM.md)

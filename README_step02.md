@@ -2,7 +2,6 @@
 
 [![License Apache2](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Discord](https://img.shields.io/discord/685554030159593522)](https://discord.com/widget?id=685554030159593522&theme=dark)
-[![Actions Status](https://github.com/DataStax-Academy/battlestax/workflows/BattleStax%20Tests/badge.svg)](https://github.com/DataStax-Academy/battlestax/actions)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e265340f-c6a6-4d7b-b24c-438b87c67876/deploy-status)](https://app.netlify.com/sites/battlestax-tutorial/deploys)
 
 🏠 [Table of Contents](./README.md#%EF%B8%8F-table-of-contents) > 📚 [What is DataStax Astra and Stargate](./README_Astra_Stargate.md) > ⚒️ **[Connect to your Astra database](#)**
@@ -25,8 +24,6 @@ In step 2 of the Battlestax tutorial, we will:
 4. [Connect to Astra](#4-connect-to-astra)
 5. [Hook it all together](#5-hook-it-all-together)
 6. [Running TDD tests](#6-running-tdd-tests)
-7. [Merge back to master](#7-merge-back-to-master)
-7. [Verify your deployment in Netlify](#8-verify-your-deployment-in-netlify)
 
 One of the first things we need to do is hook up the "plumbing" of our application to talk to our back-end services, namely, our Cassandra database with **Astra** and **Netlify**. Once this is in place, we are connected and ready to go with the services we need to power our app.
 
@@ -36,7 +33,7 @@ _ehem...for those of you familiar with Apache Cassandra, yes, I just said you co
 
 ![Document API Flow](./tutorial/document-api.png?raw=true)
 
-For a **FULL** code solution to this section **`right-click`** the image below and choose **`Open Link in New Tab`**.
+For a **FULL** code solution to this section **`click`** the image below or just go [HERE](https://github.com/DataStax-Academy/battlestax/blob/0443dc38b0b31cc4b82d54f0624e822cd1a00398/functions/insertGame.js). You can also use the [RAW](https://raw.githubusercontent.com/DataStax-Academy/battlestax/0443dc38b0b31cc4b82d54f0624e822cd1a00398/functions/insertGame.js) version for easy copying.
 
 [![Code solution](./tutorial/step-1-code-solution.png?raw=true)](https://github.com/DataStax-Academy/battlestax/pull/2/files)
 
@@ -51,30 +48,21 @@ For a **FULL** code solution to this section **`right-click`** the image below a
 |**✅ Step 1a. Register (if needed) and Sign In to Astra** :<br/>![.](./tutorial/line.png?raw=true)|
 |:---|
 ||
-|<details><summary><i>🖱️ Click me to show details</i></summary><br/>You can use your `Github`, `Google` accounts or register with an `email`.<br/>Make sure to chose a password with minimum 8 characters, containing upper and lowercase letters, at least one number and special character<br/><br/>- [Registration Page](https://dtsx.io/workshop)<br/>![Registration Image](https://github.com/datastaxdevs/shared-assets/blob/master/astra/login-1000.png?raw=true)<br/><br/>- [Authentication Page](https://dtsx.io/workshop)<br/>![Login Image](https://github.com/datastaxdevs/shared-assets/blob/master/astra/signin-raw.png?raw=true)<br/></details>|
+|<details><summary><i>🖱️ Click me to show details</i></summary><br/>You can use your `Github`, `Google` accounts or register with an `email`.<br/>Make sure to chose a password with minimum 8 characters, containing upper and lowercase letters, at least one number and special character<br/><br/>[Authentication Page](https://dtsx.io/workshop)<br/>![Login Image](https://github.com/datastaxdevs/shared-assets/blob/master/astra/signin-raw.png?raw=true)<br/></details>|
 
 |**✅ Step 1b. Choose the free plan and select your region**<br/>![.](./tutorial/line.png?raw=true)|
 |:---|
 ||
-|<details><summary><i>🖱️ Click me to show details</i></summary><br/>![my-pic](https://github.com/datastaxdevs/shared-assets/blob/master/astra/choose-a-plan-1000-annotated.png?raw=true)<br/>- **Select the free tier**: 5GB storage, no obligation<br/>- **Select the region**: This is the region where your database will reside physically (choose one close to you or your users). For people in EMEA please use `europe-west1` idea here is to reduce latency.<br/></details>|
+|<details><summary><i>🖱️ Click me to show details</i></summary><br/>![my-pic](https://github.com/DataStax-Academy/battlestax/blob/master/tutorial/creatastra-1.png?raw=true)<br/>- **Select the free tier**: 5GB storage, no obligation<br/>- **Select the region**: This is the region where your database will reside physically (choose one close to you or your users). For people in EMEA please use `europe-west1` idea here is to reduce latency.<br/></details>|
 
 |**✅ Step 1c. Configure and create your database**<br/>![.](./tutorial/line.png?raw=true)|
 |:---|
 ||
-|<details><summary><i>🖱️ Click me to show details</i></summary><br/>You will find below which values to enter for each field.<br/><br/>![my-pic](https://github.com/datastaxdevs/shared-assets/blob/master/astra/create-and-configure-annotated-1000.png?raw=true)<br/>- **Fill in the database name** - `battlestax_db.` While Astra allows you to fill in these fields with values of your own choosing, please follow our reccomendations to make the rest of the exercises easier to follow. If you don't, you are on your own! :)<br/>- **Fill in the keyspace name** - `battlestax`. It's really important that you use the name sa_index here in order for all the exercises to work well. We realize you want to be creative, but please just roll with this one today.<br/>- **Fill in the Database User name** - `battle_user`. Note the user name is case-sensitive. Please use the case we suggest here.<br/>- **Fill in the password** - `battle_password1`. Fill in both the password and the confirmation fields. Note that the password is also case-sensitive. Please use the case we suggest here.<br/>- **Create the database**. Review all the fields to make sure they are as shown, and click the **`Create Database`** button.<br/><br/>You will see your new database `Pending` in the Dashboard.<br/>![my-pic](https://github.com/datastaxdevs/shared-assets/blob/master/astra/dashboard-pending-1000.png?raw=true)<br/><br/>The status will change to `Active` when the database is ready, this will only take 2-3 minutes. You will also receive an email when it is ready.<br/></details>|
+|<details><summary><i>🖱️ Click me to show details</i></summary><br/>You will find below which values to enter for each field.<br/><br/>![my-pic](https://github.com/DataStax-Academy/battlestax/blob/master/tutorial/creatastra-2.png?raw=true)<br/>- **Fill in the database name** - `battlestax_db.` While Astra allows you to fill in these fields with values of your own choosing, please follow our reccomendations to make the rest of the exercises easier to follow. If you don't, you are on your own! :)<br/>- **Fill in the keyspace name** - `battlestax`. It's really important that you use the name battlestax here in order for all the exercises to work well. We realize you want to be creative, but please just roll with this one today.<br/>- **Fill in the Database User name** - `battle_user`. Note the user name is case-sensitive. Please use the case we suggest here.<br/>- **Fill in the password** - `battle_password1`. Fill in both the password and the confirmation fields. Note that the password is also case-sensitive. Please use the case we suggest here.<br/>- **Create the database**. Review all the fields to make sure they are as shown, and click the **`Create Database`** button.<br/><br/>You will see your new database `Pending` in the Dashboard.<br/>![my-pic](https://github.com/DataStax-Academy/battlestax/blob/master/tutorial/creatastra-3.png?raw=true)<br/><br/>The status will change to `Active` when the database is ready, this will only take 2-3 minutes. You will also receive an email when it is ready.<br/></details>|
 
 ## 2. Setup your environment
 
-**✅ Step 2a: Checkout expected branch**
-
-1. Switch to branch `step-2`
-* For this part of the tutorial, we will be working in step-2 branch. Switch branches by using the following command in the terminal
-
-📘 **Command to execute**
-
-`git checkout step-2`
-
-**✅ Step 2b: Set environment variables in code**
+**✅ Step 2a: Set environment variables in code**
 
 In the ["hello world"](./README_step01.md) section, we pushed a simple helloWorld "test" function to get a feel for how things work. Now, we are going to start working with the "real" code to get our game working. To do this, we need to set a group of environment  variables referring to the database we just created with **DataStax Astra**, not only in our code, but across **GitHub** and **Netlify** as well.
 
@@ -86,7 +74,7 @@ First things first, we need to get the values we are going to use for our variab
 
 ✔  Go back to the **Astra** UI and click on the database you just created to get the details page.
 
-![Netlify Setup Example](./tutorial/netlify-createsite-5.png?raw=true)
+![Group 10](https://user-images.githubusercontent.com/69874632/101394474-6dd9f480-387d-11eb-96f5-05a6ee711fac.png)
 
 🟢 `ASTRA_DB_USERNAME` as `battle_user` *(The user name we defined when creating the Astra instance)*
 
@@ -104,7 +92,7 @@ First things first, we need to get the values we are going to use for our variab
 
 _The following instructions are the same whether using GitPod or a local IDE._
 
-✔  Ensure that you are in the ??battlestax??? directory
+✔  Ensure that you are in the root ./battlestax directory
 
 ✔  Copy and paste the contents of the `.env.template` file into an `.env` file:
 
@@ -112,7 +100,9 @@ _The following instructions are the same whether using GitPod or a local IDE._
 
 `cat .env.example > .env`
 
-✔ The `.env` file allows us to customize our own environmental variables. We set our Astra credentials to env variables, which are outside of our program. Fill in the `.env` file variables with the Astra variables you made a copy of above:
+✔ The `.env` file allows us to customize our own environmental variables. We set our Astra credentials to env variables, which are outside of our program. Fill in the `.env` file variables with the Astra variables you made a copy of above. 
+
+*To edit the `.env` file either double click on it in the file explorer in GitPod or use your favorite editor to make the changes. Up to you. Don't forget to save.*
 
 **_If you used different values for your database you will need to use those instead, otherwise just use the values we've provided._**
 
@@ -125,7 +115,7 @@ _The following instructions are the same whether using GitPod or a local IDE._
 
 ![Netlify Setup Example](./tutorial/gitpod-env.png?raw=true)
 
-**✅ Step 2c: Set environment variables _(secrets)_ in GitHub for CI/CD**
+**✅ Step 2b: Set environment variables _(secrets)_ in GitHub for CI/CD**
 
 Every application should have a CI/CD *(**C**ontinuous **I**ntegration, **C**ontinuous **D**eployment)* pipeline. This allows for quick iteration of changes to production deployment by taking advantage of automation and tests to ensure everything is working properly. 
 
@@ -144,7 +134,7 @@ After each commit a workflow is initialized to BUILD your project, EXECUTE tests
 
 ![Netlify Setup Example](./tutorial/setup-github-1.png?raw=true)
 
-**✅ Step 2d: Set environment variables in Netlify**
+**✅ Step 2c: Set environment variables in Netlify**
 
 ✔ Go back to **Netlify** and navigate to **`Site settings`** in the toolbar, then choose **`Build & deploy`** from the menu on the left.
 
@@ -177,7 +167,7 @@ You don't have to do that ever again, we promise. From now on anytime you deploy
 
 Now that we have **ALLLLL** of our environment vars set and our game document store, let's start building our basic `insertGame` serverless function, in the `function/insertGame.js` file. 
 
-First, we need to declare `gameId` and `gamePayload` variables. We know each game is associated with it's own unique game id, and during game play we can anticipate getting a payload from the user.
+<!-- First, we need to declare `gameId` and `gamePayload` variables. We know each game is associated with it's own unique game id, and during game play we can anticipate getting a payload from the user.
 
 📘 **Code to copy**
 
@@ -186,6 +176,7 @@ First, we need to declare `gameId` and `gamePayload` variables. We know each gam
 let gameId;
 let gamePayload;
 ```
+-->
 
 From Netlify, you get your `gameId` parameter from the path of the incoming REST call, and parse our event body that is associated with it as the `gamePayload`.
 By default, Netlify puts your function at the path `/.netlify/function/insertGame`.
@@ -269,7 +260,8 @@ Finally, we are going to try to take all our configuration infomation stored in 
 };
 ```
 
-For a **FULL** code solution to this section **`right-click`** the image below and choose **`Open Link in New Tab`**.
+
+For a **FULL** code solution to this section **`click`** the image below or just go [HERE](https://github.com/DataStax-Academy/battlestax/blob/0443dc38b0b31cc4b82d54f0624e822cd1a00398/functions/insertGame.js). You can also use the [RAW](https://raw.githubusercontent.com/DataStax-Academy/battlestax/0443dc38b0b31cc4b82d54f0624e822cd1a00398/functions/insertGame.js) version for easy copying.
 
 [![Code solution](./tutorial/step-1-code-solution.png?raw=true)](https://github.com/DataStax-Academy/battlestax/pull/2/files)
 
@@ -326,40 +318,6 @@ npm run test:functions
 📗 **Expected output**
 
 ![test functions output](./tutorial/step-1-test-functions.png)
-
-### [🔝](#)
-
-## 7. Merge back to master
-
-Now that we've updated our code we need to push these changes back to master and kick off an automated deploy in Netlify.
-
-📘 **Commands to execute**
-
-```bash
-git add functions/insertGame.js
-git commit -m "Merging step2 into master
-git push
-```
-
-### [🔝](#)
-
-## 8. Verify your deployment in Netlify
-
-✔️  When your new site is ready, you will be able to go to: `<your_url>.netlify.app` to see your game.
-
-![Netlify Setup Example](./tutorial/netlify-createsite-8.png?raw=true)
-
-If you start new games it will create a new record in the database. If you want to validate this behavirour click on `START NEW GAME`.
-
-✔️  Open Astra UI, show the `CQL Console` and execute the following command (here *battlestax* is your keyspace and *games* your collection name - if you chose another names adapt the query accordingly).
-
-📘 **Command to execute**
-
-`SELECT key, text_value FROM battlestax.games;`
-
-You should have a result that looks like:
-
-![Netlify Setup Example](./tutorial/netlify-createsite-9.png?raw=true)
 
 ### [🔝](#)
 

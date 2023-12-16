@@ -28,7 +28,7 @@ Jamstack is the new standard architecture for the web. Using Git workflows and m
  </tr>
  <tr>
   <td><img src="./tutorial/jamstack/logo-angular.png"/></td>
-  <td><a href="https://angularjs.org/">AngularJS</a></td>
+  <td><a href="https://angular.io/docs">Angular</a></td>
  </tr>
 <tr>
   <td><img src="./tutorial/jamstack/logo-vuejs.png"/></td>
@@ -84,7 +84,7 @@ You can find a pretty exhaustive list [here](https://jamstack.org/generators/).
 
 A CDN allows for the quick transfer of assets needed for loading Internet content including HTML pages, javascript files, stylesheets, images, and videos. The popularity of CDN services continues to grow, and today the majority of web traffic is served through CDNs, including traffic from major sites like Facebook, Netflix, and Amazon.
 
-![ok](./tutorial/jamstack/cdn.png)
+![ok](./tutorial/jamstack/CDN.png)
 
 
 **🔵 Logical Architecture** 
@@ -182,9 +182,9 @@ Let us show you this one today
 
 - Netlify is integrated with GITHUB, on new commit it will BUILD and deploy the SITE on the CDN
 
-- To code and commit to github we will use an IDE. You cacn use your own or we will provide you one in the Cloud called GITPOD.
+- To code and commit to github we will use an IDE. You can use your own or we will provide you one in the Cloud called GITPOD.
 
-- The application we will deploy is BattleStax. This is not only static content but also a REST API retrieve Data from a DB. The DB will ne DataStax Astra.
+- The application we will deploy is BattleStax. This is not only static content but also a REST API retrieve Data from a DB. The DB will be DataStax Astra.
 
 
 ![Template CTRL click](./tutorial/architecture1.png?raw=true)

@@ -2,7 +2,6 @@
 
 [![License Apache2](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Discord](https://img.shields.io/discord/685554030159593522)](https://discord.com/widget?id=685554030159593522&theme=dark)
-[![Actions Status](https://github.com/DataStax-Academy/battlestax/workflows/BattleStax%20Tests/badge.svg)](https://github.com/DataStax-Academy/battlestax/actions) 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e265340f-c6a6-4d7b-b24c-438b87c67876/deploy-status)](https://app.netlify.com/sites/battlestax-tutorial/deploys)
 
 🏠 [Table of Contents](./README.md#%EF%B8%8F-table-of-contents) > 📚 [What can Netlify do for you](#README_Netlify.md)> ⚒️ **[Expose your "hello world" API](#)**
@@ -20,6 +19,8 @@ The REST API is `stateless`, and therefore helps functions scale horizontally. H
 2. [Make a serverless endpoint using Netlify functions](#2-make-a-serverless-endpoint-using-netlify-functions)
 3. [Merge back to master](#3-merge-back-to-master)
 4. [Check your deployment in Netlify](#4-check-your-deployment-in-netlify)
+
+For a **FULL** code solution to this section **`click`** [HERE](https://github.com/DataStax-Academy/battlestax/blob/058a4d280beb9a98f2aa3afd12bc54e6873e3107/functions/helloWorld.js). You can also use the [RAW](https://raw.githubusercontent.com/DataStax-Academy/battlestax/058a4d280beb9a98f2aa3afd12bc54e6873e3107/functions/helloWorld.js) version for easy copying.
 
 ---
 
@@ -68,14 +69,14 @@ We just need to configure the default remote once. Run the below command to set 
 
 `git config checkout.defaultRemote origin`</br>
 
-**✅ Step 1c: Checkout expected branch**
+**✅ Step 1c: Create a local branch for code changes**
 
-1. Switch to branch `step-1`
-* For this part of the tutorial, we will be working in step-1 branch. Switch branches by using the following command in the terminal. 
+1. Create a local branch `myBranch`
+* We'll create a "feature" branch to record changes locally and then push to master when we're ready to deploy. 
 
 📘 **Command to execute**
 
-`git checkout step-1`
+`git checkout -b myBranch`
 
 ### [🔝](#%EF%B8%8F-table-of-contents)
 
@@ -141,6 +142,8 @@ Using your new terminal, execute the following command to get your helloWorld en
 
 This is our **serverless** function giving us back the "Hello World" example.
 
+For a **FULL** code solution to this section **`click`** [HERE](https://github.com/DataStax-Academy/battlestax/blob/058a4d280beb9a98f2aa3afd12bc54e6873e3107/functions/helloWorld.js). You can also use the [RAW](https://raw.githubusercontent.com/DataStax-Academy/battlestax/058a4d280beb9a98f2aa3afd12bc54e6873e3107/functions/helloWorld.js) version for easy copying.
+
 **✅ Step 2c: Run the existing unit tests**
 
 ✔️ Have a look at the `/test/helloWorld.test.js` file, this does not do much at this point. This basically tests the `helloWorld` function to ensure that we get "world" in our response, and hence we would know that the function is working correctly.
@@ -165,7 +168,7 @@ Run the test to try it out:
 📘 **Command to execute**
 
 ```bash
-npm run test:functions
+$(npm bin)/jest test/helloWorld.test.js --coverage --setupFiles dotenv/config --testEnvironment node
 ```
 ### [🔝](#%EF%B8%8F-table-of-contents)
 
@@ -178,8 +181,8 @@ Now that we've updated our code we need to push these changes back to master and
 📘 **Commands to execute**
 
 `git add functions/helloWorld.js test/helloWorld.test.js`<br/>
-`git commit -m "Merging step1 into master"`<br/>
-`git push`<br/>
+`git commit -m "Merging helloWorld into master"`<br/>
+`git push --set-upstream origin myBranch`<br/>
 
 Once you've pushed your changes go back to your repository in GitHub and create a pull request to merge our step-1 branch changes into master. **_Ensure that you are merging back into your YOUR master branch_**.
 
@@ -187,17 +190,16 @@ Once you've pushed your changes go back to your repository in GitHub and create 
 
 Using `Github UI`, merge your new branch to the master using a pull request.
 
-✔️ Select the master branch in github
+✔️ Select the **`myBranch`** branch in github, then click the **`Pull request`** button on the right
 >![Netlify Setup Example](./tutorial/setup-github-2.png?raw=true)
 
-✔️ Click and `Compare & Pull request` button. for `step-1` into `master`.
+✔️ IMPORTANT!!! Do not use the default base repository **`DataStax-Academy/battlestax`** !!!
 >![Netlify Setup Example](./tutorial/setup-github-3.png?raw=true)
 
-✔️ Caution don't target the original master from DataStax-Academy but **YOUR** master
+✔️ Instead, click on the **`base respository`** dropdown and choose the battlestax repository from **YOUR** account
 >![Netlify Setup Example](./tutorial/setup-github-4.png?raw=true)
 
 ✔️ Provide a comment and click `Create Pull Request`
->![Netlify Setup Example](./tutorial/setup-github-5.png?raw=true)
 
 ✔️ Once your tests have passed, click on `Merge Pull Request`
 >![Netlify Setup Example](./tutorial/setup-github-7.png?raw=true)

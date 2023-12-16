@@ -1,6 +1,11 @@
 [build]
-command = "npm run build"
-functions = "functions"
-publish = "build"
-[context.production.environment]
-NODE_VERSION = "16.14.2"
+  command = "npm run build"
+  functions = "functions"
+  publish = "build"
+
+[build.environment]
+  NODE_VERSION = "16.14.2"
+
+# Add more context-specific settings if needed, for example:
+[context.deploy-preview]
+  # Specific settings for deploy previews can go here if necessary
